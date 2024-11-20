@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-API_KEY = "04a8d0562ba75062e6da45a6585b6db0"
+API_KEY = ""
 FORECAST_ENDPOINT = "http://api.openweathermap.org/data/2.5/forecast"
 
 WIND_DIRECTIONS_LV = {
