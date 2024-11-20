@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laikapstākļi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Laikapstākļi</h1>
+
+    <!-- Search Form -->
+    <form method="POST">
+        <label for="city">Ievadiet pilsētas nosaukumu:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Meklēt</button>
+    </form>
+
+    <!-- Error Message Display -->
+    {% if error_message %}
+        <p style="color: red; font-weight: bold;">{{ error_message }}</p>
+    {% endif %}
+
+    <div class="content-wrapper">
+        {% if weather_data %}
+            <!-- Weather Data Display -->
+            <div class="weather-data">
+                <h2>Laikapstākļi {{ weather_data.city }} ({{ weather_data.country }})</h2>
+                <h3>Prognoze: {{ weather_data.forecast[0].time }}</h3>
+                <p>Temperatūra: {{ weather_data.forecast[0].temperature }}°C</p>
+                <p>Mitrums: {{ weather_data.forecast[0].humidity }}%</p>
+                <p>Apraksts: {{ weather_data.forecast[0].description }}</p>
+                <p>Vēja ātrums: {{ weather_data.forecast[0].wind_speed }} m/s</p>
+                <p>Vēja virziens: {{ weather_data.forecast[0].wind_direction }}</p>
+            </div>
+
+            <!-- Display the temperature graph -->
+            <img src="data:image/png;base64,{{ graph_url }}" alt="Temperature Graph" width="800" height="400">
+        {% else %}
+            <!-- No weather data available message -->
+            <p>Nav pieejami dati. Lūdzu, ievadiet pilsētu un mēģiniet vēlreiz.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
